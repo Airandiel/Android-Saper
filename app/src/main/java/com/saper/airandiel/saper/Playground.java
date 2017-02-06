@@ -31,6 +31,7 @@ import static android.icu.lang.UCharacter.GraphemeClusterBreak.V;
 import static java.security.AccessController.getContext;
 
 public class Playground extends AppCompatActivity {
+    final Handler h = new Handler();
     LinearLayout WHOLE_LAYOUT;
     LinearLayout upperMenu;
     RelativeLayout playground;
@@ -50,16 +51,13 @@ public class Playground extends AppCompatActivity {
      */
     int YFirstClick = 0;
     int XFirstClick = 0;
-
     TextView lose;
     TextView win;
     TextView textMinesLeft;
     TextView textTime;
-
     boolean firstClick = true;
     boolean endGame = false;
-    boolean settingsIsClicked=false;
-    final Handler h = new Handler();
+    boolean settingsIsClicked = false;
 
     /**
      * Called when the activity is first created.
@@ -73,6 +71,7 @@ public class Playground extends AppCompatActivity {
         WHOLE_LAYOUT.setOrientation(LinearLayout.VERTICAL);
         playground = new RelativeLayout(this);
         scale = this.getResources().getDisplayMetrics().density;
+        WHOLE_LAYOUT.setPadding((int)(scale*16+0.5f),(int)(scale*16+0.5f),(int)(scale*16+0.5f),(int)(scale*16+0.5f));
         showMenu();
         //prepareGame();
 
@@ -80,8 +79,10 @@ public class Playground extends AppCompatActivity {
     }
 
 
-    /**Prepare game*/
-    public void prepareGame(){
+    /**
+     * Prepare game
+     */
+    public void prepareGame() {
         WHOLE_LAYOUT.removeAllViews();
         /**initialise values of variables*/
         minesLeft = numberOfMines;
@@ -554,24 +555,23 @@ public class Playground extends AppCompatActivity {
 
     private void showMenu() {
         h.removeCallbacksAndMessages(null);
-        secondCounter=0;
+        secondCounter = 0;
         upperMenu.removeAllViews();
         playground.removeAllViews();
         WHOLE_LAYOUT.removeAllViews();
-        settingsIsClicked=false;
-        TextView minesweeper=new TextView(this);
-        Button Play=new Button(this);
-        Button Settings=new Button(this);
+        settingsIsClicked = false;
+        TextView minesweeper = new TextView(this);
+        Button Play = new Button(this);
+        Button Settings = new Button(this);
         Button Exit = new Button(this);
 
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        layoutParams.weight=2;
+        layoutParams.weight = 2;
         minesweeper.setLayoutParams(layoutParams);
         minesweeper.setText("MINESWEEPER");
         minesweeper.setGravity(Gravity.CENTER);
         minesweeper.setTextSize(TypedValue.COMPLEX_UNIT_SP, 40);
-        layoutParams.weight=1;
-
+        layoutParams.weight = 1;
 
 
         Play.setLayoutParams(layoutParams);
@@ -613,23 +613,29 @@ public class Playground extends AppCompatActivity {
         Button button5 = new Button(this);
         Button button6 = new Button(this);
 
-        layoutParams.width=LinearLayout.LayoutParams.WRAP_CONTENT;
+        layoutParams.width = LinearLayout.LayoutParams.WRAP_CONTENT;
         TextHighOfPlayground.setLayoutParams(layoutParams);
         TextHighOfPlayground.setText("High of playground");
+        TextHighOfPlayground.setGravity(Gravity.CENTER);
         TextWidthOfPlayground.setLayoutParams(layoutParams);
         TextWidthOfPlayground.setText("Width of playground");
+        TextWidthOfPlayground.setGravity(Gravity.CENTER);
         TextSetNumberOfMines.setLayoutParams(layoutParams);
         TextSetNumberOfMines.setText("Number of mines");
+        TextSetNumberOfMines.setGravity(Gravity.CENTER);
 
         EditHighOfPlayground.setLayoutParams(layoutParams);
-        EditHighOfPlayground.setText(""+playgroundHigh);
-        EditHighOfPlayground.setId(1+9000);
+        EditHighOfPlayground.setText("" + playgroundHigh);
+        EditHighOfPlayground.setId(1 + 9000);
+        EditHighOfPlayground.setGravity(Gravity.CENTER);
         EditWidthOfPlayground.setLayoutParams(layoutParams);
-        EditWidthOfPlayground.setText(""+playgroundWidth);
-        EditWidthOfPlayground.setId(2+9000);
+        EditWidthOfPlayground.setText("" + playgroundWidth);
+        EditWidthOfPlayground.setId(2 + 9000);
+        EditWidthOfPlayground.setGravity(Gravity.CENTER);
         EditNumberOfMines.setLayoutParams(layoutParams);
-        EditNumberOfMines.setText(""+numberOfMines);
-        EditNumberOfMines.setId(3+9000);
+        EditNumberOfMines.setText("" + numberOfMines);
+        EditNumberOfMines.setId(3 + 9000);
+        EditNumberOfMines.setGravity(Gravity.CENTER);
         //layoutParams.width=LinearLayout.LayoutParams.WRAP_CONTENT;
         //layoutParams.height=(int) (48 * scale + 0.5f);
         button1.setLayoutParams(layoutParams);
@@ -637,17 +643,17 @@ public class Playground extends AppCompatActivity {
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TextView temp = (TextView) findViewById(9000+1);
+                TextView temp = (TextView) findViewById(9000 + 1);
                 playgroundHigh--;
-                if(playgroundHigh<0){
-                    playgroundHigh=0;
+                if (playgroundHigh < 0) {
+                    playgroundHigh = 0;
                 }
-                if(numberOfMines>(playgroundWidth*playgroundHigh)/2){
-                    numberOfMines=(playgroundWidth*playgroundHigh)/2;
-                    TextView tempor = (TextView) findViewById(9000+3);
-                    tempor.setText(""+numberOfMines);
+                if (numberOfMines > (playgroundWidth * playgroundHigh) / 2) {
+                    numberOfMines = (playgroundWidth * playgroundHigh) / 2;
+                    TextView tempor = (TextView) findViewById(9000 + 3);
+                    tempor.setText("" + numberOfMines);
                 }
-                temp.setText(""+playgroundHigh);
+                temp.setText("" + playgroundHigh);
             }
         });
         button2.setLayoutParams(layoutParams);
@@ -655,15 +661,15 @@ public class Playground extends AppCompatActivity {
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TextView temp = (TextView) findViewById(9000+1);
+                TextView temp = (TextView) findViewById(9000 + 1);
                 playgroundHigh++;
 
-                if(numberOfMines>(playgroundWidth*playgroundHigh)/2){
-                    numberOfMines=(playgroundWidth*playgroundHigh)/2;
-                    TextView tempor = (TextView) findViewById(9000+3);
-                    tempor.setText(""+numberOfMines);
+                if (numberOfMines > (playgroundWidth * playgroundHigh) / 2) {
+                    numberOfMines = (playgroundWidth * playgroundHigh) / 2;
+                    TextView tempor = (TextView) findViewById(9000 + 3);
+                    tempor.setText("" + numberOfMines);
                 }
-                temp.setText(""+playgroundHigh);
+                temp.setText("" + playgroundHigh);
             }
         });
         button3.setLayoutParams(layoutParams);
@@ -671,14 +677,14 @@ public class Playground extends AppCompatActivity {
         button3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TextView temp = (TextView) findViewById(9000+2);
+                TextView temp = (TextView) findViewById(9000 + 2);
                 playgroundWidth--;
-                if(numberOfMines>(playgroundWidth*playgroundHigh)/2){
-                    numberOfMines=(playgroundWidth*playgroundHigh)/2;
-                    TextView tempor = (TextView) findViewById(9000+3);
-                    tempor.setText(""+numberOfMines);
+                if (numberOfMines > (playgroundWidth * playgroundHigh) / 2) {
+                    numberOfMines = (playgroundWidth * playgroundHigh) / 2;
+                    TextView tempor = (TextView) findViewById(9000 + 3);
+                    tempor.setText("" + numberOfMines);
                 }
-                temp.setText(""+playgroundWidth);
+                temp.setText("" + playgroundWidth);
             }
         });
         button4.setLayoutParams(layoutParams);
@@ -686,14 +692,14 @@ public class Playground extends AppCompatActivity {
         button4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TextView temp = (TextView) findViewById(9000+2);
+                TextView temp = (TextView) findViewById(9000 + 2);
                 playgroundWidth++;
-                if(numberOfMines>(playgroundWidth*playgroundHigh)/2){
-                    numberOfMines=(playgroundWidth*playgroundHigh)/2;
-                    TextView tempor = (TextView) findViewById(9000+3);
-                    tempor.setText(""+numberOfMines);
+                if (numberOfMines > (playgroundWidth * playgroundHigh) / 2) {
+                    numberOfMines = (playgroundWidth * playgroundHigh) / 2;
+                    TextView tempor = (TextView) findViewById(9000 + 3);
+                    tempor.setText("" + numberOfMines);
                 }
-                temp.setText(""+playgroundWidth);
+                temp.setText("" + playgroundWidth);
             }
         });
         button5.setLayoutParams(layoutParams);
@@ -701,15 +707,15 @@ public class Playground extends AppCompatActivity {
         button5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TextView temp = (TextView) findViewById(9000+3);
+                TextView temp = (TextView) findViewById(9000 + 3);
                 numberOfMines--;
-                if(numberOfMines<0){
-                    numberOfMines=0;
+                if (numberOfMines < 0) {
+                    numberOfMines = 0;
                 }
-                if(numberOfMines>(playgroundWidth*playgroundHigh)/2){
-                    numberOfMines=(playgroundWidth*playgroundHigh)/2;
+                if (numberOfMines > (playgroundWidth * playgroundHigh) / 2) {
+                    numberOfMines = (playgroundWidth * playgroundHigh) / 2;
                 }
-                temp.setText(""+numberOfMines);
+                temp.setText("" + numberOfMines);
             }
         });
         button6.setLayoutParams(layoutParams);
@@ -717,17 +723,16 @@ public class Playground extends AppCompatActivity {
         button6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TextView temp = (TextView) findViewById(9000+3);
+                TextView temp = (TextView) findViewById(9000 + 3);
                 numberOfMines++;
-                if(numberOfMines>(playgroundWidth*playgroundHigh)/2){
-                    numberOfMines=(playgroundWidth*playgroundHigh)/2;
+                if (numberOfMines > (playgroundWidth * playgroundHigh) / 2) {
+                    numberOfMines = (playgroundWidth * playgroundHigh) / 2;
                 }
-                temp.setText(""+numberOfMines);
+                temp.setText("" + numberOfMines);
             }
         });
-        layoutParams.width=LinearLayout.LayoutParams.MATCH_PARENT;
+        layoutParams.width = LinearLayout.LayoutParams.MATCH_PARENT;
         //layoutParams.height=LinearLayout.LayoutParams.WRAP_CONTENT;
-
 
 
         first.addView(TextHighOfPlayground);
@@ -748,12 +753,12 @@ public class Playground extends AppCompatActivity {
         Settings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!settingsIsClicked) {
+                if (!settingsIsClicked) {
                     bigSettings.addView(first);
                     bigSettings.addView(second);
                     bigSettings.addView(third);
                     WHOLE_LAYOUT.addView(bigSettings);
-                    settingsIsClicked=true;
+                    settingsIsClicked = true;
                 }
             }
         });
