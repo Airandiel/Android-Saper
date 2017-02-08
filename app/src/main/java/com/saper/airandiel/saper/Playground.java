@@ -643,7 +643,7 @@ public class Playground extends AppCompatActivity {
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TextView temp = (TextView) findViewById(9000 + 1);
+                TextView temp = (TextView) findViewById(1+9000);
                 playgroundHigh--;
                 if (playgroundHigh < 0) {
                     playgroundHigh = 0;
@@ -661,7 +661,7 @@ public class Playground extends AppCompatActivity {
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TextView temp = (TextView) findViewById(9000 + 1);
+                TextView temp = (TextView)  findViewById(1+9000);
                 playgroundHigh++;
 
                 if (numberOfMines > (playgroundWidth * playgroundHigh) / 2) {
